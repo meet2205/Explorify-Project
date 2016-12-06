@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href = "http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<style>
+	h1.heading{
+		text-align: center;
+	}
+	
+	h3.subtext{
+		text-align: center;
+		font-style: italic;
+	}
+</style>
+</head>
+
+<body ng-app="explorifyApp">
+<div class="container" ng-controller="myController">
+	<hr>
+		<p>
+			<marquee behavior="scroll" direction="left">
+				<img src="images/goldengate_film_landing1.jpg" height=200 width=350>
+				<img src="images/fishermans_wharf.jpg" height=200 width=350>
+				<img src="images/GhiradeliSQ.jpg" height=200 width=350>
+				<img src="images/PIER_39.jpg" height=200 width=350>
+				<img src="images/USQ.jpg" height=200 width=350>
+				<img src="images/coit_tower.jpg" height=200 width=350>
+				<img src="images/missionPeak.jpg" height=200 width=350>
+				<img src="images/walt-disney-family-museum.jpg" height=200 width=350>
+				<img src="images/san-francisco-chinatown.jpg" height=200 width=350>
+				<img src="images/california-s-great-america.jpg" height=200 width=350>
+				<img src="images/twin-peaks.jpg" height=200 width=350>
+				<img src="images/san-francisco-cable-car-rides.jpg" height=200 width=350>
+			</marquee>
+		</p>
+	<hr>
+	<h1 class="heading">Explorify</h1>
+	<h3 class="subtext">Come.See.Explore.</h3>
+	<hr>
+	<p><input type="text" ng-model="name" style="width:550px; margin-left:20%;">
+	<span class="glyphicon glyphicon-search"></span> Filter Results
+	</input>
+	</p>
+	<hr>
+	
+	<table class="table table-striped">
+		<thead>
+		<tr>
+		  <th>ID</th>    
+		  <th>Place</th>
+		  <th>Category</th>
+		  <th>Address</th>
+		  <th>Phone</th>
+		  <th>Timings</th>
+		</tr>
+		</thead>
+		<tbody>
+				<tr ng-repeat="poi in placesOfInterest | filter:name">
+				    <td>{{poi.id}}</td>		
+					<td>{{ poi.place }}</td>
+					<td>{{ poi.category }}</td>
+					<td>{{ poi.address }}</td>
+					<td>{{ poi.phone }}</td>
+					<td>{{ poi.timings }}</td>
+					
+					<!--Edit Button-->
+					<td>
+					<button class="btn" ng-click="editPlace($index)">
+					<span class="glyphicon glyphicon-pencil"></span>  Edit
+					</button>
+					</td>
+					<!--Edit Button-->
+					
+					<!--Delete Button-->
+					<td>
+					<button class="btn" ng-click="deletePlace(poi)" style="color:red">
+					<span class="glyphicon glyphicon-trash"></span>  Delete  
+					</button>
+					</td>
+					<!--Delete Button-->
+					
+					<!--Map Button-->
+					<td>
+					<button class="btn" ng-click="showMap(poi)">
+					<span class="glyphicon glyphicon-map-marker"></span>  Map
+					</button>
+					</td>
+					<!--Map Button-->
+				</tr>
+		</tbody>
+    </table>
+
+	<hr>
+<h3 ng-show="edit">Add New Location:</h3>
+<h3 ng-hide="edit">Edit Details:</h3>
+	<hr>
+	
+<form class="form-horizontal">
+	<!--ID Label-->
+	<div class="form-group">
+		<label class="col-sm-2 control-label"> ID:</label>
+		<div class="col-sm-10">
+			<input type="text" id="addTB1" ng-model="newId"  placeholder="ID">
+		</div>
+	</div>
+	<!--ID Label-->
+  
+	<!--Place Label-->
+	<div class="form-group">
+		<label class="col-sm-2 control-label"> Place:</label>
+		<div class="col-sm-10">
+			<input type="text" id="addTB2" ng-model="newPlace"  placeholder="Place">
+		</div>
+	</div> 
+	<!--Place Label-->
+	
+	<!--Category Label-->
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Category:</label>
+		<div class="col-sm-10">
+			<input type="text" id="addTB3" ng-model="newCategory" placeholder="Category">
+			<input type="hidden" ng-model="temp_id">
+		</div>
+	</div>
+    <!--Category Label-->
+	
+	<!--Address Label-->
+	<div class="form-group">
+		<label class="col-sm-2 control-label"> Address:</label>
+		<div class="col-sm-10">
+			<input type="text" id="addTB" ng-model="newAddress"  placeholder="Address">
+		</div>
+	</div> 
+	<!--Address Label-->
+  
+	<!--Phone Label-->
+	<div class="form-group">
+		<label class="col-sm-2 control-label"> Phone:</label>
+		<div class="col-sm-10">
+			<input type="text" id="addTB4" ng-model="newPhone"  placeholder="Phone">
+		</div>
+	</div> 
+    <!--Phone Label-->
+	
+	<!--Timings Label-->
+	<div class="form-group">
+		<label class="col-sm-2 control-label"> Timings:</label>
+		<div class="col-sm-10">
+			<input type="text" id="addTB5" ng-model="newTimings"  placeholder="Timings">
+		</div>
+	</div> 
+	<!--Timings Label-->
+  
+</form>
+
+<hr>
+	<button class="btn btn-success" ng-click="addPlace()">
+		<span class="glyphicon glyphicon-plus"></span>  Add New Location
+	</button>
+	
+	<button class="btn btn-success" ng-disabled="false" ng-click="saveEditChanges()">
+		<span class="glyphicon glyphicon-ok"></span>  Save Changes
+	</button>
+<hr>
+
+<script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+<script src= "explorifyApp.js"></script>
+</div> <!-- Container div ends-->
+</body>
+</html>
